@@ -1,7 +1,7 @@
 {
   "name": "get_css_from_js",
   "version": "1.0.0",
-  "description": "Get CSS classes out of a JS source file and save it to a JSON file.",
+  "description": "Get CSS classes out of a JS source file and return it as JSON.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,4 +24,7 @@
     "url": "https://github.com/gstoert/get_css_from_js/issues"
   },
   "homepage": "https://github.com/gstoert/get_css_from_js"
+//  "dependencies": {
+//    "file": "~5.*"
+//  },
 }
