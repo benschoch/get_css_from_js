@@ -1,6 +1,6 @@
 {
   "name": "get_css_from_js",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Get CSS classes out of a JS source file and return it as JSON.",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,4 @@
     "url": "https://github.com/gstoert/get_css_from_js/issues"
   },
   "homepage": "https://github.com/gstoert/get_css_from_js"
-//  "dependencies": {
-//    "file": "~5.*"
-//  },
 }
