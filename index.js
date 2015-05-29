@@ -18,19 +18,49 @@
   };
 
   var getAllClassNames = function (string) {
-    var classNames = getObviousSelectors(string);
+    var classNames = [];
+
+    classNames = classNames.concat(getObviousSelectors(string));
+    classNames = classNames.concat(getJQueryMethodClassNames(string));
 
     return classNames;
   };
 
   var getObviousSelectors = function (string) {
     var classNames = [];
-    string.replace(/(\"|\')([\s\w\[\]=#]*[\.]+[\s\w\.#\[\]=]+)(\"|\')/g, function (selector, prefix) {
+    string.replace(/(\"|\')([\s\w\[\]=#]*[\.]+[\s\w\.#\[\]=_-]+)(\"|\')/g, function (selector, prefix) {
       var foundClasses = getClasssNameFromSelector(selector);
       for (var i = 0; i < foundClasses.length; i++) {
+        if (foundClasses[i].indexOf(".") === 0) {
+          foundClasses[i] = foundClasses[i].substring(1);
+        }
         classNames.push(foundClasses[i]);
       }
     });
+
+    return classNames;
+  };
+
+  var getJQueryMethodClassNames = function (string) {
+    var classNames = [];
+
+    var methods = [
+      'hasClass',
+      'addClass',
+      'toggleClass'
+    ];
+
+    for (var i = 0; i < methods.length; i++) {
+      var regexStr = methods[i] + '\\([\\\"\\\']([\\s_a-zA-Z0-9-]+)[\\\"\\\']\\)';
+      var regEx = new RegExp(regexStr, 'g');
+      string.replace(regEx, function (selector, prefix) {
+        var matches = selector.replace(/.*["']([\s_a-zA-Z0-9-]+)(["']).*/, "$1");
+        matches = getClasssNameFromSelector(matches, true);
+        for (var i = 0; i < matches.length; i++) {
+          classNames.push(matches[i]);
+        }
+      });
+    }
 
     return classNames;
   };
