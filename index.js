@@ -9,24 +9,64 @@
     var foundClasses = [];
     for (var i = 0; i < src.length; i++) {
       var srcFile = src[i];
-      fs.readFile(srcFile, 'utf8', function read(err, data) {
-        if (err) {
-          throw err;
-        }
-        var classNames = getAllClassNames(data);
-      });
+      var fileContent = fs.readFileSync(srcFile).toString();
+      foundClasses = foundClasses.concat(getAllClassNames(fileContent));
     }
+    foundClasses = getUniqueArray(foundClasses);
+
+    return foundClasses;
   };
 
   var getAllClassNames = function (string) {
-    var classNames = getObviousClassName(string);
+    var classNames = getObviousSelectors(string);
+
+    return classNames;
   };
 
-  var getObviousClassName = function (string) {
+  var getObviousSelectors = function (string) {
     var classNames = [];
-    var result = string.replace(/(\"|\')([\s\w_\-\.#]+)(\"|\')/g, function (className, prefix) {
-      console.log(className);
+    string.replace(/(\"|\')([\s\w\[\]=#]*[\.]+[\s\w\.#\[\]=]+)(\"|\')/g, function (selector, prefix) {
+      var foundClasses = getClasssNameFromSelector(selector);
+      for (var i = 0; i < foundClasses.length; i++) {
+        classNames.push(foundClasses[i]);
+      }
     });
+
+    return classNames;
+  };
+
+  var getClasssNameFromSelector = function (selector, ignoreDot) {
+    var foundClasses = [];
+    if (typeof selector === "string" && (ignoreDot || selector.indexOf('.') > -1)) {
+      var regexStr = '(\\.)(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)';
+      var selectors = [selector];
+      if (ignoreDot) {
+        regexStr = '([_a-zA-Z]+[_a-zA-Z0-9-]+)';
+        if (selector.indexOf(' ') > -1) {
+          selectors = selector.split(' ');
+        }
+      }
+      var regex = new RegExp(regexStr, 'g');
+      for (var i = 0; i < selectors.length; i++) {
+        selectors[i].replace(regex, function (className) {
+          foundClasses.push(className);
+        });
+      }
+    }
+
+    return foundClasses;
+  };
+
+  var getUniqueArray = function (ar) {
+    var u = {}, a = [];
+    for (var i = 0, l = ar.length; i < l; ++i) {
+      if (u.hasOwnProperty(ar[i])) {
+        continue;
+      }
+      a.push(ar[i]);
+      u[ar[i]] = 1;
+    }
+    return a;
   };
 
   module.exports = function (src, options) {

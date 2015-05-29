@@ -1,14 +1,19 @@
-/**
- * Created by benjaminschoch on 29.05.15.
- */
 var div = jQuery('div .test #hello');
 
-var justAfileName = 'DONT_TAKE_ME.BAD';
+var justAfileName = '/path/actually_no_class.json';
 
 var div2 = jQuery('.test');
 
-div.append('<span class="append"></span>');
+var div3 = $('#idOnlyPleaseIgnore');
 
-if (div.hasClass("append")) {
-  div.addClass("appended");
+var attrSelector = $('#someId input[type=text].className');
+
+var justAtag = $('section');
+
+var regexTest = new RegExp('(\.testString)', 'g');
+
+div.append('<span class="append"></span>');
+var span = div.find(".append");
+if (span.hasClass("append")) {
+  span.addClass("appended");
 }

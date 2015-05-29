@@ -5,4 +5,5 @@
 var css = require('./index.js');
 
 
-css('./src.js');
+var classNames = css('./src.js');
+console.log(classNames);
