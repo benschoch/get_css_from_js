@@ -1,0 +1,27 @@
+{
+  "name": "get_css_from_js",
+  "version": "1.0.0",
+  "description": "Get CSS classes out of a JS source file and save it to a JSON file.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gstoert/get_css_from_js.git"
+  },
+  "keywords": [
+    "css",
+    "class",
+    "js",
+    "parse",
+    "read",
+    "json"
+  ],
+  "author": "Benjamin Schoch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gstoert/get_css_from_js/issues"
+  },
+  "homepage": "https://github.com/gstoert/get_css_from_js"
+}
