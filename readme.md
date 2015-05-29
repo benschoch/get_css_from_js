@@ -16,15 +16,15 @@ $ npm install --save get_css_from_js
 ## Usage
 
 ```js
-var GetCssFromJs = require('get_css_from_js');
+var getCssFromJs = require('get_css_from_js');
 
-var classNames = GetCssFromJs('script.js').getClassNames();
+var classNames = getCssFromJs('script.js');
 ```
 
 or you can provide an array of files
 
 ```js
-var GetCssFromJs = require('get_css_from_js');
+var getCssFromJs = require('get_css_from_js');
 
-var classNames = GetCssFromJs(['script1.js', 'script2.js']).get();
+var classNames = getCssFromJs(['script1.js', 'script2.js']);
 ```
