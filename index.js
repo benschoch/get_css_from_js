@@ -47,6 +47,7 @@
     var methods = [
       'hasClass',
       'addClass',
+      'removeClass',
       'toggleClass'
     ];
 
